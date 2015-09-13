@@ -8,7 +8,21 @@ module.exports = function(sequelize, DataTypes) {
 	}, {
 		classMethods: {
 			associate: function(models) {
-				BlogUser.belongsTo(models.UserProfile, {
+				BlogUser.hasOne(models.UserProfile, {
+					onDelete: 'CASCADE',
+					foreignKey: {
+						allowNull: false
+					}
+				});
+				BlogUser.belongsToMany(models.Post, {
+					through: 'BlogUserPosts',
+					onDelete: 'CASCADE',
+					foreignKey: {
+						allowNull: false
+					}
+				});
+				BlogUser.belongsToMany(models.Comment, {
+					through: 'BlogUserComments',
 					onDelete: 'CASCADE',
 					foreignKey: {
 						allowNull: false

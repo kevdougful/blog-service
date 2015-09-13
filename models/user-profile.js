@@ -9,7 +9,7 @@ module.exports = function(sequelize, DataTypes) {
 	}, {
 		classMethods: {
 			associate: function(models) {
-				UserProfile.hasOne(models.BlogUser, {
+				UserProfile.belongsTo(models.BlogUser, {
 					onDelete: 'CASCADE',
 					foreignKey: {
 						allowNull: false

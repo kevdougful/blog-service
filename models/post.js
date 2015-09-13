@@ -16,6 +16,27 @@ module.exports = function(sequelize, DataTypes) {
 						allowNull: false
 					}
 				});
+				Post.belongsTo(models.Topic, {
+					onDelete: 'CASCADE',
+					foreignKey: {
+						allowNull: false
+					}
+				});
+				Post.belongsToMany(models.Tag, {
+					through: 'PostTags'
+				});
+				Post.hasMany(models.Comment, {
+					onDelete: 'CASCADE',
+					foreignKey: {
+						allowNull: false
+					}
+				});
+				Post.belongsTo(models.BlogUser, {
+					onDelete: 'CASCADE',
+					foreignKey: {
+						allowNull: false
+					}
+				});
 			}
 		}
 	});

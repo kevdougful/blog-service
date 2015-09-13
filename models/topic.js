@@ -8,7 +8,7 @@ module.exports = function(sequelize, DataTypes) {
 	}, {
 		classMethods: {
 			associate: function(models) {
-				Topic.belongsTo(models.Post, {
+				Topic.hasMany(models.Post, {
 					onDelete: 'CASCADE',
 					foreignKey: {
 						allowNull: false
