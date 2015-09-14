@@ -3,7 +3,9 @@
   "version": "0.0.0",
   "private": true,
   "scripts": {
-    "start": "node ./bin/www"
+    "start": "node ./bin/www",
+    "test": "npm run test-unit",
+    "test-unit": "mocha tests/unit/*.test.js"
   },
   "dependencies": {
     "body-parser": "~1.13.2",
@@ -21,6 +23,7 @@
     "bluebird": "^2.9.33",
     "expect.js": "^0.3.1",
     "mocha": "^2.2.5",
+    "chai": "^3.2.0",
     "supertest": "^1.0.1"
   }
 }
