@@ -16,10 +16,7 @@ module.exports = function(sequelize, DataTypes) {
 				});
 				BlogUser.belongsToMany(models.Post, {
 					through: 'BlogUserPosts',
-					onDelete: 'CASCADE',
-					foreignKey: {
-						allowNull: false
-					}
+					foreignKey: 'BlogUserId'
 				});
 				BlogUser.belongsToMany(models.Comment, {
 					through: 'BlogUserComments',
