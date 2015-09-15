@@ -34,7 +34,7 @@ typings/
 tsd.json
 
 # Database config
-config/
+config.json
 
 # VSCode config
 .vscode/
