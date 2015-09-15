@@ -32,3 +32,6 @@ node_modules
 # DefinitelyTyped
 typings/
 tsd.json
+
+# Database config
+config/
