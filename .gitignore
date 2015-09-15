@@ -35,3 +35,6 @@ tsd.json
 
 # Database config
 config/
+
+# VSCode config
+.vscode/
