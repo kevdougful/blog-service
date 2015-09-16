@@ -53,10 +53,10 @@ router.post('/create', function(req, res) {
 router.put('/:blog_id/update', function(req, res) {
 	// Only allow certain fields to be updated
 	var newValues = {};
-	if (req.body.Name !== null)
-		newValues.Name = req.body.Name;
+	if (req.body.name !== null)
+		newValues.Name = req.body.name;
 	if (req.body.Description !== null)
-		newValues.Description = req.body.Description;
+		newValues.Description = req.body.description;
 
 	// Update record
 	models.Blog.update(
