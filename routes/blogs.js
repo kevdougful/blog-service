@@ -81,8 +81,8 @@ router.post('/:blog_id/posts/create', function(req, res) {
 		DateCreated: Date(),
 		CommentsAllowed: req.body.commentsAllowed,
 		BlogId: req.params.blog_id,
-		TopicId: 1,
-		BlogUserId: 1
+		TopicId: req.body.topicId,
+		BlogUserId: req.body.blogUserId
 	}).catch(function(error) {
 		res.json(error.message);
 	}).then(function(newPost) {
