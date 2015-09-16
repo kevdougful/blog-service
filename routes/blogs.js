@@ -64,12 +64,12 @@ router.put('/:blog_id/update', function(req, res) {
 		{
 			where: { id: req.params.blog_id }
 		}
-	).then(function(effectedRows) {
+	).catch(function(error) {
+		res.json(error.message);
+	}).then(function(effectedRows) {
 		res.json({
 			effectedRows: effectedRows
 		});
-	}).catch(function() {
-		res.json(error.message);
 	});
 });
 
