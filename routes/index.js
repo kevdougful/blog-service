@@ -18,12 +18,14 @@ router.post('/auth', function(req, res) {
             'error': 'Authentication failed.' + error.message
         });
     }).then(function(user) {
+        // Use same message for bad username or password
+        var authErrorMessage = 'Authentication failed. User/password incorrect';
         
         // User not found
         if (!user) {
             res.json({
                 'success': false,
-                'error': 'Authentication failed. User not found.'
+                'error': authErrorMessage
             });
         }
         
@@ -31,7 +33,7 @@ router.post('/auth', function(req, res) {
         if (user.Password != req.body.password) {
             res.json({
                 'success': false,
-                'error': 'Authentication failed. Wrong password.'
+                'error': authErrorMessage
             });
         } else {
             // User found, password matches
