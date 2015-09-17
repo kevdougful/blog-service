@@ -1,6 +1,9 @@
 var models  = require('../models');
 var express = require('express');
 var router  = express.Router();
+var auth = require('./auth-token');
+
+router.use(auth);
 
 /* GET all blogs from DB */
 router.get('/', function(req, res) {

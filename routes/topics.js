@@ -5,6 +5,11 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 
+var auth = require('./auth-token');
+
+router.use(auth);
+
+
 /* GET all topics from DB */
 router.get('/', function(req, res) {
 	models.Topic.findAll({

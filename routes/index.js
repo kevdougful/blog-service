@@ -6,6 +6,8 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
+var secret = require('../config/secret').secret;
+
 /* Authenticate */
 router.post('/auth', function(req, res) {
     models.BlogUser.findOne({
@@ -38,7 +40,6 @@ router.post('/auth', function(req, res) {
         } else {
             // User found, password matches
             // Create a token
-            var secret = require('../config/secret').secret;
             var token = jwt.sign(user, secret, {
                 expiresInMinutes: 1440 // 24 hours
             });
