@@ -7,6 +7,7 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
+var config = require('./config/secret');
 
 var routes = require('./routes/index');
 var users = require('./routes/users');
@@ -15,6 +16,9 @@ var topics = require('./routes/topics');
 var comments = require('./routes/comments');
 
 var app = express();
+
+// Password/token secret
+app.set('secret', config.secret);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
