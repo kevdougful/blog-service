@@ -3,7 +3,7 @@ var express = require('express');
 var router = express.Router();
 
 /* Create new user */
-router.post('/create', function(req, res, next) {
+router.post('/create', function(req, res) {
     models.BlogUser.create({
         AuthUserStringId: req.body.username,
         Password: req.body.password,
@@ -12,7 +12,6 @@ router.post('/create', function(req, res, next) {
             'success': false,
             'error': error.message
         });
-        // next(error);
     }).then(function(newUser) {
         res.json({
             'success': true 
