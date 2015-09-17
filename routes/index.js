@@ -5,6 +5,7 @@ var models = require('../models');
 var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
+var bcrypt = require('bcrypt');
 
 var secret = require('../config/secret').secret;
 
@@ -31,8 +32,10 @@ router.post('/auth', function(req, res) {
             });
         }
         
+        var passwordMatch = bcrypt.compareSync(req.body.password, user.Password);
+        
         // User found, wrong password
-        if (user.Password != req.body.password) {
+        if (!passwordMatch) {
             res.json({
                 'success': false,
                 'error': authErrorMessage
