@@ -28,7 +28,13 @@
     
   },
   "facebook": {
-    
+    "appId": null,
+    "appSecret": "",
+    "callbackURL": {
+      "development": "localhost:5000/auth/facebook/callback",
+      "test": "",
+      "production": ""
+    }
   },
   "twitter": {
     
