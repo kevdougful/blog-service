@@ -1,22 +1,36 @@
 // Change connection details and rename to config.json
 {
-  "development": {
-    "dialect": "sqlite",
-    "storage": "./db.development.sqlite"
+  "databases": {
+    "development": {
+      "dialect": "sqlite",
+      "storage": "./db.development.sqlite"
+    },
+    "test": {
+      "username": "root",
+      "password": null,
+      "database": "database_test",
+      "host": "127.0.0.1",
+  	  "port": "1234",
+      "dialect": "mysql"
+    },
+    "production": {
+      "username": "root",
+      "password": null,
+      "database": "database_production",
+      "host": "127.0.0.1",
+      "dialect": "mysql"
+    }
   },
-  "test": {
-    "username": "root",
-    "password": null,
-    "database": "database_test",
-    "host": "127.0.0.1",
-	"port": "1234",
-    "dialect": "mysql"
+  "jwtAuth": {
+    "secret": "serversidesecretstring"
   },
-  "production": {
-    "username": "root",
-    "password": null,
-    "database": "database_production",
-    "host": "127.0.0.1",
-    "dialect": "mysql"
+  "google": {
+    
+  },
+  "facebook": {
+    
+  },
+  "twitter": {
+    
   }
 }

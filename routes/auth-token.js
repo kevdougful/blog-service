@@ -5,7 +5,7 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 
-var secret = require('../config/secret').secret;
+var secret = require('../config/config.json').jwtAuth.secret;
 
 module.exports = function(req, res, next) {
     // Check header, url parameters, or post parameters for token
