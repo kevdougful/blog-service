@@ -36,5 +36,8 @@ tsd.json
 # Database config
 config.json
 
+# Sensitive Auth files
+config/secret.js
+
 # VSCode config
 .vscode/

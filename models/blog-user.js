@@ -4,7 +4,21 @@
 module.exports = function(sequelize, DataTypes) {
 	var BlogUser = sequelize.define('BlogUser', {
 		AuthUserIntId: DataTypes.INTEGER,
-		AuthUserStringId: DataTypes.STRING
+		AuthUserStringId: DataTypes.STRING,
+		// Storing plain text for now (will ultimately store hashes)
+		Password: DataTypes.STRING,
+		CanPost: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		},
+		CanComment: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: true
+		},
+		Admin: {
+			type: DataTypes.BOOLEAN,
+			defaultValue: false
+		}
 	}, {
 		classMethods: {
 			associate: function(models) {
