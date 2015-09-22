@@ -6,8 +6,45 @@ var express = require('express');
 var router = express.Router();
 var jwt = require('jsonwebtoken');
 var bcrypt = require('bcrypt');
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
-var secret = require('../config/secret').secret;
+var env = process.env.NODE_ENV || 'development';
+var config = require('../config/config.json');
+var jwtSecret = config.jwtAuth.secret;
+var facebook = config.facebook;
+
+/* Passport.js setup */
+passport.use(new FacebookStrategy({
+        clientID: facebook.appId,
+        clientSecret: facebook.appSecret,
+        callbackURL: facebook.callbackURL[env]
+    },
+    function(accessToken, refreshToken, profile, done) {
+        models.BlogUser.findOrCreate({
+            where: {
+                AuthUserStringId: profile.id
+            },
+            defaults: {
+                Password: accessToken
+            }, 
+        }).spread(function(user, created) {
+            console.log(user.get({
+                plain: true
+            }));
+            console.log(created);
+            passport.serializeUser(function(userr, doner) {
+                doner(null, userr);
+            });
+            //done(null, user);
+        });
+        // }).catch(function(error) {
+        //     done(error);
+        // }).then(function(user) {
+        //     done(null, user);
+        // });
+    })
+);
 
 /* Authenticate */
 router.post('/auth', function(req, res) {
@@ -43,7 +80,7 @@ router.post('/auth', function(req, res) {
         } else {
             // User found, password matches
             // Create a token
-            var token = jwt.sign(user, secret, {
+            var token = jwt.sign(user, jwtSecret, {
                 expiresInMinutes: 1440 // 24 hours
             });
             
@@ -55,5 +92,14 @@ router.post('/auth', function(req, res) {
         }
     });
 });
+
+/* Login with Facebook */
+router.get('/auth/facebook', passport.authenticate('facebook'));
+router.get('/auth/facebook/callback',
+    passport.authenticate('facebook', {
+        successRedirect: '/',
+        failureRedirect: '/'
+    }));
+
 
 module.exports = router;
