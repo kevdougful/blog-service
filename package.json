@@ -26,6 +26,8 @@
     "sequelize": "^3.3.2",
     "sequelize-cli": "^1.7.1",
     "serve-favicon": "~2.3.0",
+    "should": "^7.1.0",
+    "sinon": "^1.17.1",
     "sqlite3": "^3.0.8"
   },
   "devDependencies": {
