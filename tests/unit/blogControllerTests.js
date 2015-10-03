@@ -1,22 +1,14 @@
 var sinon = require('sinon');
 var should = require('should');
 var models = require('../../models');
+var async = require('async');
 
 describe('Blog Controller Unit Tests', function() {
 	describe('GET', function() {
 		it('Responds with 204 if no blog posts exists.', function() {
-			// var Model = {
-			// 	Blog: {
-			// 		findAll: function() {
-			// 			return [];
-			// 		}
-			// 	},
-			// 	Post: { }
-			// }
+			
 			var Model = {
-				Blog: models.Blog.build({
-					
-				}, 
+				Blog: models.Blog.build({ },
 				{ 
 					include: [ models.Post ] 
 				})
@@ -27,6 +19,7 @@ describe('Blog Controller Unit Tests', function() {
 					var blogs = [];
 					resolve(blogs);
 				});
+				
 				return p;
 			};
 			
@@ -39,9 +32,17 @@ describe('Blog Controller Unit Tests', function() {
 			
 			var blogController = require('../../controllers/blogController')(Model);
 			
-			blogController.get(req, res);
-			console.log(res.status.args[0]);
-			res.status.calledWith(204).should.equal(true, 'Bad status' + res.status.args[0][0]);
+			async.waterfall([
+					function(callback) {
+						blogController.get(req, res);
+						callback(null, res);
+					}
+				], 
+				function(err, result) {
+					console.log(result.status.args[0]);
+					result.status.calledWith(204).should.equal(true, 'Bad status' + result.status.args[0][0]);
+				});
+				
 		});
 	});
 });
