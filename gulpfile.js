@@ -18,6 +18,6 @@ gulp.task('default', function() {
 });
 
 gulp.task('test', function() {
-	gulp.src('tests/*.js', { read: false })
+	gulp.src('tests/unit/*.js', { read: false })
 		.pipe(mocha({ reporter: 'nyan' }));
-})
+});

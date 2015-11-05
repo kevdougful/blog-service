@@ -9,9 +9,12 @@ var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
 var passport = require('passport');
 
+var Model = require('./models');
+
 var routes = require('./routes/index');
 var users = require('./routes/users');
-var blogs = require('./routes/blogs');
+var blogRouter = require('./routes/blogs')(Model);
+//var blogs = require('./routes/blogs');
 var topics = require('./routes/topics');
 var comments = require('./routes/comments');
 
@@ -33,7 +36,7 @@ app.use(passport.session());
 
 app.use('/', routes);
 app.use('/users', users);
-app.use('/blogs', blogs);
+app.use('/blogs', blogRouter);
 app.use('/topics', topics);
 app.use('/comments', comments);
 
